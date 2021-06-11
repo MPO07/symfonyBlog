@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{article.title}}{% endblock %}
+
+{% block backgroundImage %}url({{ article.picture }}){% endblock %}
+
+{% block h1 %}{{ article.title }}{% endblock %}
+
+{% block subTitle %}{{ article.subtitle }}{% endblock %}
+
+{% block body %}
+    <article class="post-preview">
+        <p class="post-meta">
+            Posté par
+            <a href="#!">{{ article.author.firstname }} {{ article.author.lastname }}</a>
+            {{ article.publishedAt|date('d/m/Y') }}
+            dans 
+            {% for category in article.categories %}
+                <a href="#!">{{ category.title }} </a>
+            {% endfor %}
+        </p>
+        <p>{{article.content}}</p>
+    </article>
+    <!-- Divider-->
+    <hr class="my-4" />
+{% endblock %}

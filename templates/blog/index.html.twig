@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon Blog{% endblock %}
+
+{% block backgroundImage %}url('assets/img/home-bg.jpg'){% endblock %}
+
+{% block h1 %}Mon Blog{% endblock %}
+
+{% block subTitle %}A Blog by Moi{% endblock %}
+
+{% block body %}
+{% for article in articles %}
+        <article class="post-preview">
+            <img src="{{ article.picture }}" />
+            <a href="{{ path ('article_detail', {slug : article.slug}) }}">
+                <h2 class="post-title">{{ article.title }}</h2>
+                <h3 class="post-subtitle">{{ article.subtitle }}</h3>
+            </a>
+            <p class="post-meta">
+                Posté par
+                <a href="#!">{{ article.author.firstname }} {{ article.author.lastname }}</a>
+                {{ article.publishedAt|date('d/m/Y') }}
+                dans 
+                {% for category in article.categories %}
+                    <a href="#!">{{ category.title }} </a>
+                {% endfor %}
+            </p>
+        </article>
+        <!-- Divider-->
+        <hr class="my-4" />
+    {% endfor %}
+{% endblock %}
